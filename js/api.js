@@ -24,7 +24,9 @@ const loadUsers = async (number) => {
         //bucle para cargar cada usuario obtenido en la peticion a la api al array
         for(let i = 0; i < number; i++) {
             const user = await requestApi();
-            users.push(user);
+            if (user) {
+                users.push(user);
+            }
         }
     } catch (error) {
         console.log(error.message)
@@ -35,6 +37,7 @@ const loadUsers = async (number) => {
 
 // Función para cargar usuarios y actualizar CardUser
 const loadAndDisplayUser = async (number) => {
+    let users = [];
     try {
         const users = await loadUsers(number);
         console.log('usuarios:', users);
@@ -63,8 +66,8 @@ const loadAndDisplayUser = async (number) => {
                         <h3 class="cardUser_nombre">${user.name.first} ${user.name.last}</h3>`;
                     userElement.addEventListener('click', () => updateCardUser(user));
                     listUser.appendChild(userElement);
+                    });
                 });
-            });
         };
         
         FindUser();
@@ -134,6 +137,7 @@ const loadAndDisplayUser = async (number) => {
                     const registro = document.getElementById('fechaRegistro_modal');
                     const antiguedad = document.getElementById('antiguedadMiembro_modal');
                     const frase = document.getElementById('frase_modal');
+                    const AutorFrase = document.getElementById('autorFrase_modal');
 
                     //const genero = user.gender === 'male' ? 'masculino' : 'femenino';
 
@@ -153,12 +157,10 @@ const loadAndDisplayUser = async (number) => {
                     fechaNacimiento.textContent = `Fecha de Nacimiento: ${user.dob.date}`
                     registro.textContent = `Fecha de Registro: ${user.registered.date}`
                     antiguedad.textContent = `Antiguedad: ${user.registered.age}`
-                    //frase.textContent = `${user.email}`
+                    //frase.textContent = ``
 
                     const modal = document.getElementById('modal');
                     modal.classList.add('is-visible');
-
-                        
                 }
             }
         };
@@ -172,16 +174,13 @@ const loadAndDisplayUser = async (number) => {
 
         // Función manejadora para eventos en el modal
         function handleModalEvents(e) {
+            const modal = document.getElementById('modal');
             const closeButton = document.querySelector('.close-modal');
     
-            if (e.target === closeButton) {
+            if (e.target === closeButton || e.target === modal) {
                 closeModal();
             }
-        
-            if (e.target === document.getElementById('modal')) {
-                closeModal();
-            }
-        
+
             if (e.key === 'Escape') {
                 closeModal();
             }
@@ -195,17 +194,35 @@ const loadAndDisplayUser = async (number) => {
         document.addEventListener('click', handleModalEvents);
 
         // agregar evento manejador fuera del modal
-        document.addEventListener('keyup', handleModalEvents);
+        //document.addEventListener('keyup', handleModalEvents);
 
 
         // Agregar usuarios a listUser
-        users.forEach((user) => {
+        users.forEach((user, index) => {
             const userElement = document.createElement('div');
             userElement.classList.add('listUsers_card');
             userElement.innerHTML = `
                 <img class="cardUser_img" src="${user.picture.thumbnail}"/>
                 <h3 class="cardUser_nombre">${user.name.first} ${user.name.last}</h3>`;
-            userElement.addEventListener('click', () => updateCardUser(user));
+
+            userElement.addEventListener('click', () => {
+                // Remover la clase 'selected' de todos los elementos antes de agregarla al clickeado
+                const allUserElements = document.querySelectorAll('.listUsers_card');
+                allUserElements.forEach((element) => {
+                    element.classList.remove('selected');
+                });
+
+                // Agregar la clase 'selected' al elemento clickeado
+                userElement.classList.add('selected');
+
+                updateCardUser(user);
+            });
+
+            //agregar class selected al primer elemento porque es el que se muestra por default
+            if (index === 0) {
+                userElement.classList.add('selected');
+            }
+
             listUser.appendChild(userElement);
         });
 
@@ -214,7 +231,7 @@ const loadAndDisplayUser = async (number) => {
     } catch (error) {
         console.log(error.message);
     }
-};
+}
 
 // Llamar a la función para cargar y mostrar usuarios
 loadAndDisplayUser(10);
