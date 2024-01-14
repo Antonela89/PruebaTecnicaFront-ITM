@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--link css-->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/modal.css">
+    <title>Usuarios</title>
+</head>
+<body>
+    <header class="headerUser">
+        <p class="headerUser_p">InTech MOM</p>
+        <input class="headerUser_input" type="search">
+        <p class="headerUser_p headerUser_p--descripcion">Prueba Técnica Front</p>
+    </header>
+
+    <main class="mainUser">
+        <article class="listUsers">
+        </article>
+
+        <section class="CardUser">
+        </section>
+
+        <div id="modal" class="modal">
+            <div class="modal-dialog">
+                <header class="modalHeader">
+                    <button class="close-modal" aria-label="close modal" data-close>
+                        <i class="fa-regular fa-circle-xmark modal_icono"></i>
+                    </button>
+                    <h1 class="modalNombre"></h1>
+                </header>
+                <section class="modalContent">
+                    <img class="modal_img" src="" alt="" id="imgUser_modal">
+
+                    <p class="modal_p" id="phone_modal"></p>
+                    <p class="modal_p" id="cell_modal"></p>
+                    <p class="modal_p" id="email_modal"></p>
+
+                    <p class="modal_p" id="postcode_modal"></p>
+                    <p class="modal_p" id="street_modal"></p>
+                    <p class="modal_p" id="city_modal"></p>
+                    <p class="modal_p" id="state_modal"></p>
+                    <p class="modal_p" id="country_modal"></p>
+
+                    <p class="modal_p" id="nacionalidad_modal"></p>
+
+                    <p class="modal_p" id="age_modal"></p>
+                    <p class="modal_p" id="gender_modal"></p>
+                    <p class="modal_p" id="fechaNacimiento_modal"></p>
+
+                    <p class="modal_p" id="fechaRegistro_modal"></p>
+                    <p class="modal_p" id="antiguedadMiembro_modal"></p>
+
+                    <p class="modal_p" id="frase_modal"></p>
+
+                </section>
+                <footer class="modalFooter"></footer>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footerUser">
+        <p class="footerUser_p">Antonela Borgogno - 2023</p>
+    </footer>
+<!-- scripts -->
+<script src="./js/api.js"></script>
+<!-- link fontawesome -->
+<script src="https://kit.fontawesome.com/245c15f4d4.js" crossorigin="anonymous"></script>
+</body>
+</html>
