@@ -6,17 +6,28 @@
     <!--link css-->
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/modal.css">
+    <link rel="stylesheet" href="./css/loader.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- Link Fuentes  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+
     <title>Usuarios</title>
 </head>
 <body>
     <header class="headerUser">
-        <p class="headerUser_p">InTech MOM</p>
+        <h1 class="headerUser_p">InTech MOM - Usuarios</h1>
         <input class="headerUser_input" type="search">
         <p class="headerUser_p headerUser_p--descripcion">Prueba Técnica Front</p>
     </header>
 
     <main class="mainUser">
         <article class="listUsers">
+            <div class="loader"></div>
         </article>
 
         <section class="CardUser">
@@ -28,32 +39,64 @@
                     <button class="close-modal" aria-label="close modal" data-close>
                         <i class="fa-regular fa-circle-xmark modal_icono"></i>
                     </button>
-                    <h1 class="modalNombre"></h1>
+                    <h2 class="modalNombre"></h2>
                 </header>
                 <section class="modalContent">
-                    <img class="modal_img" src="" alt="" id="imgUser_modal">
 
-                    <p class="modal_p" id="phone_modal"></p>
-                    <p class="modal_p" id="cell_modal"></p>
-                    <p class="modal_p" id="email_modal"></p>
+                    <div class="modal_img_frase">
+                        <img class="modal_img" src="" alt="" id="imgUser_modal">
 
-                    <p class="modal_p" id="postcode_modal"></p>
-                    <p class="modal_p" id="street_modal"></p>
-                    <p class="modal_p" id="city_modal"></p>
-                    <p class="modal_p" id="state_modal"></p>
-                    <p class="modal_p" id="country_modal"></p>
+                        <p class="modal_p" id="frase_modal"></p>>
+                        <!-- <p class="modal_p" id="autorFrase_modal"></p> -->
+                    </div>
 
-                    <p class="modal_p" id="nacionalidad_modal"></p>
+                    <div class="modal_informacion">
+                        <div class="modal_datos modal_datos_personales">
+                            <h3 class="modal_titulo">Datos Personales:</h3>
+                            <label class="modal_label" for="username_modal">Usuario:</label>
+                            <input class="modal_input" id="username_modal"/>
+                            <label class="modal_label" for="fechaRegistro_modal">Fecha de Registro:</label>
+                            <input class="modal_input" id="fechaRegistro_modal"/>
+                            <label class="modal_label" for="antiguedadMiembro_modal">Antigüedad:</label>
+                            <input class="modal_input" id="antiguedadMiembro_modal"/>
+                            <label class="modal_label" for="fechaNacimiento_modal">Fecha de Nacimiento:</label>
+                            <input class="modal_input" id="fechaNacimiento_modal"/>
+                            <label class="modal_label" for="age_modal">Edad:</label>
+                            <input class="modal_input" id="age_modal"/>
+                        </div>
+    
+                        <div class="modal_datos modal_datos_contacto">
+                            <h3 class="modal_titulo">Datos de Contacto:</h3>
+                            <label class="modal_label" for="phone_modal">Teléfono</label>
+                            <input class="modal_input" id="phone_modal"/>
+                            <label class="modal_label" for="cell_modal">Celular:</label>
+                            <input class="modal_input" id="cell_modal"/>
+                            <label class="modal_label" for="email_modal">Email:</label>
+                            <input class="modal_input" id="email_modal"/>
+                            <label class="modal_label" for="gender_modal">Género:</label>
+                            <input class="modal_input" id="gender_modal"/>
+                            <label class="modal_label" for="gender_modal">Nacionalidad:</label>
+                            <input class="modal_input" id="nacionalidad_modal"/>
+                        </div>
+                        
+                        <div class="modal_datos modal_datos_ubicacion">
+                            <h3 class="modal_titulo">Ubicación:</h3>
+                            <label class="modal_label" for="street_modal">Calle:</label>
+                            <input class="modal_input" id="street_modal"/>
+                            <label class="modal_label" for="city_modal">Ciudad:</label>
+                            <input class="modal_input" id="city_modal"/>
+                            <label class="modal_label" for="postcode_modal">Código Postal:</label>
+                            <input class="modal_input" id="postcode_modal"/>
+                            <label class="modal_label" for="state_modal">Estado:</label>
+                            <input class="modal_input" id="state_modal"/>
+                            <label class="modal_label" for="country_modal">País:</label>
+                            <input class="modal_input" id="country_modal"/>
+                        </div>
 
-                    <p class="modal_p" id="age_modal"></p>
-                    <p class="modal_p" id="gender_modal"></p>
-                    <p class="modal_p" id="fechaNacimiento_modal"></p>
-
-                    <p class="modal_p" id="fechaRegistro_modal"></p>
-                    <p class="modal_p" id="antiguedadMiembro_modal"></p>
-
-                    <p class="modal_p" id="frase_modal"></p>
-                    <p class="modal_p" id="autorFrase_modal"></p>
+                        <div class="modal_datos">
+                            <div class="modal_map" id="map"></div>
+                        </div>
+                    </div>
 
                 </section>
                 <footer class="modalFooter"></footer>
@@ -65,9 +108,11 @@
         <p class="footerUser_p">Antonela Borgogno - 2023</p>
     </footer>
 <!-- scripts -->
-<script src="./js/api.js"></script>
-<script type="module" src="./js/api2.js"></script>
+<script src="./js/apiUsuarios.js"></script>
+<!-- <script src="./js/apiFrases.js"></script> -->
 <!-- link fontawesome -->
 <script src="https://kit.fontawesome.com/245c15f4d4.js" crossorigin="anonymous"></script>
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
 </html>
