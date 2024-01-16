@@ -1,4 +1,4 @@
-import loadConfig from './config.js'
+import loadConfig from './config.js';
 
 const wait = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
 const apiFrases = async (retryCount = 0) => {
@@ -25,15 +25,18 @@ const apiFrases = async (retryCount = 0) => {
 
         const response = await fetch(`${servidorProxy}http://quotes.rest/qod?api_key=${api_key}`, requestOptions);
 
-        //console.log('apiFrases:', response);
+        console.log('apiFrases:', response);
 
         if (response.status === 200) {
-            const data = await response.json();
-            const frase = data.contents;
+            const frases = await response.json();
+            console.log('frases: ', frases)
 
-            console.log('frase: ', frase)
-
-            return user;
+             // Iterar sobre las frases
+            for (const frase of frases) {
+            // Imprimir la frase y el autor
+            console.log(frase.quote, frase.author);
+            }
+            
         } else if (response.status === 429 && retryCount < 5) {
             console.error('Demasiadas solicitudes. Esperando antes de intentar nuevamente.');
             await wait(3600000); // Espera 1 hora antes de intentar nuevamente (3600000 milisegundos)
